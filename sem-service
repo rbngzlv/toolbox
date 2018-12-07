@@ -35,9 +35,8 @@ service::pull_image() {
   service::run_cmd docker pull $image_name
   
   end=`date "+%s"`
-  end=$(($end-$start))
 
-  echo "dockerpull.semservice $end `date +%s`" | nc -N  short-living.metric-db.renderedtext.com 2003
+  echo $(($end-$start)) >> /tmp/stats.txt
 
 }
 
