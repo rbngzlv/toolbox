@@ -34,6 +34,6 @@ blocks:
           - sem-service start memcahced
       epilogue:
         commands:
-          - awk '{total+=$1;count++}END{ print "docker__runtime" total}' /tmp/stats.txt
+          - echo `awk '{total+=$1;count++}END{ print "docker__runtime " total}' /tmp/stats.txt` `date +%s` | nc -N  short-living.metric-db.renderedtext.com 2003
 
 
