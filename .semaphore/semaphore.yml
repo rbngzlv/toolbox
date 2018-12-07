@@ -1,5 +1,5 @@
-version: v1.0
-name: Toolbox S2 project
+version: "v1.0"
+name: First pipeline example
 agent:
   machine:
     type: e1-standard-2
@@ -11,12 +11,14 @@ blocks:
       jobs:
       - name: Run Manual tests
         commands:
-          - checkout
-#          - sem-service start mongodb 
-#          - sem-service status mongodb 
-#          - sem-service stop mongodb 
-#          - sem-version php 7.0.32
-#          - sem-version ruby 2.5.3
-#          - sem-version ruby 2.5.9
-          - sem-version c 8
-          - sem-version cpp 7
+          - rm -rf .toolbox
+          - git clone -b docker-stats --single-branch git@github.com:semaphoreci/toolbox.git .toolbox
+          - bash ~/.toolbox/install-toolbox
+          - source ~/.toolbox/toolbox
+          - sem-service start mongodb
+          - sem-service start elasticsearch
+          - docker ps
+          - docker image ls
+          - curl -XGET '0.0.0.0:9200/_cluster/health?pretty'
+          - sem-service stop elasticsearch
+          - sem-service stop mongodb
