@@ -16,9 +16,21 @@ blocks:
           - bash ~/.toolbox/install-toolbox
           - source ~/.toolbox/toolbox
           - sem-service start mongodb
+          - sleep 5
           - sem-service start elasticsearch
           - docker ps
           - docker image ls
           - curl -XGET '0.0.0.0:9200/_cluster/health?pretty'
+          - sleep 5
           - sem-service stop elasticsearch
           - sem-service stop mongodb
+          - sleep 5
+          - sem-service start mysql
+          - sleep 5
+          - sem-service start postgres
+          - sleep 5
+          - sem-service start redis
+          - sleep 5
+          - sem-service start memcahced
+
+
